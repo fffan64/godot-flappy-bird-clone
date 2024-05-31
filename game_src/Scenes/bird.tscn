@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg2e5416kr46k"]
+
+[ext_resource type="Script" path="res://Scenes/bird.gd" id="1_l2xnu"]
+[ext_resource type="Texture2D" uid="uid://bjn7mqbj3rrm" path="res://Assets/yellowbird-midflap.png" id="1_tlr3v"]
+[ext_resource type="Texture2D" uid="uid://bxetx2w3gs4gr" path="res://Assets/yellowbird-downflap.png" id="3_1y4pv"]
+[ext_resource type="Texture2D" uid="uid://cfmtmqos4atil" path="res://Assets/yellowbird-upflap.png" id="4_g4fu6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awlbo"]
+radius = 12.0
+height = 34.0
+
+[sub_resource type="Animation" id="Animation_1gxa5"]
+resource_name = "flap_wings"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_1y4pv"), ExtResource("1_tlr3v"), ExtResource("4_g4fu6")]
+}
+
+[sub_resource type="Animation" id="Animation_w3cgd"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mojr5"]
+_data = {
+"flap_wings": SubResource("Animation_1gxa5"),
+"idle": SubResource("Animation_w3cgd")
+}
+
+[node name="Bird" type="CharacterBody2D"]
+position = Vector2(0, -10)
+script = ExtResource("1_l2xnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_1y4pv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_awlbo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mojr5")
+}

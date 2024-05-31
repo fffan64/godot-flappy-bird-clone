@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://brs7d4p0p6n5u"]
+
+[ext_resource type="Texture2D" uid="uid://bwf5i0qyei8n0" path="res://Assets/background-day.png" id="1_2ykbp"]
+[ext_resource type="PackedScene" uid="uid://dg2e5416kr46k" path="res://Scenes/bird.tscn" id="1_7yvis"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="1_ndfe5"]
+[ext_resource type="PackedScene" uid="uid://6nnoxc15uux4" path="res://Scenes/ground.tscn" id="3_8i4an"]
+[ext_resource type="PackedScene" uid="uid://cijnyradws1na" path="res://Scenes/pipe_spawner.tscn" id="4_0xaq4"]
+[ext_resource type="PackedScene" uid="uid://dda850fwmptgj" path="res://Scenes/fade.tscn" id="6_fsuhj"]
+[ext_resource type="PackedScene" uid="uid://dnahn8lmtygvm" path="res://Scenes/ui.tscn" id="7_246ql"]
+[ext_resource type="AudioStream" uid="uid://b6u2f3v4bws2o" path="res://Assets/City of Backstreet.ogg" id="8_ub6jm"]
+
+[node name="main" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_ndfe5")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_2ykbp")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Ground" parent="." instance=ExtResource("3_8i4an")]
+position = Vector2(24, 200)
+
+[node name="PipeSpawner" parent="." instance=ExtResource("4_0xaq4")]
+
+[node name="Bird" parent="." instance=ExtResource("1_7yvis")]
+
+[node name="Fade" parent="." instance=ExtResource("6_fsuhj")]
+
+[node name="UI" parent="." instance=ExtResource("7_246ql")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ub6jm")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
