@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 4.2.2
-  EXPORT_NAME: first-game-test
+  EXPORT_NAME: Flappy_Bird_Clone
   PROJECT_PATH: game_src
 
 jobs:
